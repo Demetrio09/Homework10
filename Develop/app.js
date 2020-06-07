@@ -14,9 +14,30 @@ const manager = [];
 const engineer = [];
 const intern = [];
 
-const mgQuestion = [{
+const mgQuestion = [
+    {
+        type: "input",
+        message: "What is your Name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is your role?",
+        name: "role"
+    }
+];
 
-}]
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
