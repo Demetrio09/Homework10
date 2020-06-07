@@ -21,7 +21,17 @@ class Engineer extends Employee {
         }
         super(name, role, email, id, github);
     }
+
+    getGithub() {
+    
+    }
+
+    getRole() {
+        const eng = "Engineer";
+        return eng;
+    }
 }
+
 
 const Engineer = new Engineer();
 

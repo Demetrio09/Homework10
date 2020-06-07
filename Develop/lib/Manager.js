@@ -7,19 +7,27 @@ class Manager extends Employee {
         if (!name) {
             throw new Error("You are missing the name.");
         }
-        if(!role) {
+        if (!role) {
             throw new Error("You are missing the role.");
         }
-        if(!email) {
+        if (!email) {
             throw new Error("You are missing the email.");
         }
-        if(!id) {
+        if (!id) {
             throw new Error("You are missing the id.");
         }
-        if(!officeNumber) {
+        if (!officeNumber) {
             throw new Error("You are missing the office number.");
         }
+
+
         super(name, role, email, id, officeNumber);
+
+    }
+
+    getRole() {
+        const mgr = "Manager";
+        return mgr;
     }
 }
 

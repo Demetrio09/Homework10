@@ -52,8 +52,8 @@ class Employee {
     }
 
     getRole() {
-        const emp = "Employee";
-        return emp;
+        const ee = "Employee";
+        return ee;
     }
 }
 
