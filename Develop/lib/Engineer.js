@@ -19,6 +19,6 @@ class Engineer extends Employee {
 }
 
 
-const Engineer = new Engineer();
+// const Engineer = new Engineer();
 
 module.exports = Engineer;

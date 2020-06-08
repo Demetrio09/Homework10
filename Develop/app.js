@@ -10,36 +10,59 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const manager = [];
-const engineer = [];
-const intern = [];
+const empArray = [];
+const mgrArray = [];
+const engArray = [];
+const intArray = [];
 
-const mgQuestion = [
+const empQuestions = [
     {
         type: "input",
-        message: "What is your Name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your ID?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your email?",
-        name: "email"
-    },
-    {
-        type: "input",
-        message: "What is your role?",
-        name: "role"
+        message: ""
+    }]
+
+const mgrQuestion = inquirer
+    .prompt([
+        {
+            type: "input",
+            message: "What is your Name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is your ID?",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "What is your email?",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "What is your role?",
+            name: "role"
+        }
+    ]);
+
+const Employee = require("./lib/Employee.js");
+
+async function getEmployeeInfo() {
+    console.log("Getting employee info");
+    try {
+        const anwsers = await Employee.getName();
+        console.log(`${anwsers}`);
+    } catch (err) {
+        console.log(err);
     }
-];
+};
+
+getEmployeeInfo();
 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

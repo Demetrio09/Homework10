@@ -10,42 +10,36 @@ class Employee {
     }
 
     getName() {
-        // return inquirer
-        //     .prompt([
-        //         {
-        //             type: "input",
-        //             message: "What is your name?",
-        //             name: "name"
-        //         }
-        //     ]).then(function(name) {
-        //         console.log(name)
-        //     });
+        return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "What is your name?",
+                    name: "name"
+                }
+            ]);
     }
 
     getId() {
-        // return inquirer
-        //     .prompt([
-        //         {
-        //             type: "input",
-        //             message: "What is your id?",
-        //             name: "id"
-        //         }
-        //     ]).then(function(id) {
-        //         console.log(id)
-        //     });
+        return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "What is your id?",
+                    name: "id"
+                }
+            ])
     }
 
-    gwtEmail() {
-        // return inquirer
-        //     .prompt([
-        //         {
-        //             type: "input",
-        //             message: "What is your email?",
-        //             name: "email"
-        //         }
-        //     ]).then(function(email) {
-        //         console.log(email)
-        //     });
+    getEmail() {
+        return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    message: "What is your email?",
+                    name: "email"
+                }
+            ])
     }
 
     getRole() {
@@ -53,5 +47,5 @@ class Employee {
         return ee;
     }
 }
-
+// Employee.getName();
 module.exports = Employee;

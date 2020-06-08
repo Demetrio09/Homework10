@@ -19,6 +19,6 @@ class Intern extends Employee {
 }
 
 
-const Intern = new Intern();
+// const Intern = new Intern();
 
 module.exports = Intern;
