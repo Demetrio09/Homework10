@@ -17,44 +17,61 @@ const intArray = [];
 
 const empQuestions = [
     {
+        type: "list",
+        message: "What is your role?",
+        choices: ["Manager", "Engineer", "Intern"],
+        name: "role"
+    },
+    {
         type: "input",
-        message: ""
+        message: "What is your name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your email?",
+        name: "email"
     }]
 
-const mgrQuestion = inquirer
-    .prompt([
-        {
-            type: "input",
-            message: "What is your Name?",
-            name: "name"
-        },
-        {
-            type: "input",
-            message: "What is your ID?",
-            name: "id"
-        },
-        {
-            type: "input",
-            message: "What is your email?",
-            name: "email"
-        },
-        {
-            type: "input",
-            message: "What is your role?",
-            name: "role"
-        }
-    ]);
+const mgrQuestion = [
+    {
+        type: "input",
+        message: "What is your name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is your role?",
+        name: "role"
+    }
+];
 
 const Employee = require("./lib/Employee.js");
 
-async function getEmployeeInfo() {
-    console.log("Getting employee info");
-    try {
-        const anwsers = await Employee.getName();
-        console.log(`${anwsers}`);
-    } catch (err) {
-        console.log(err);
-    }
+function getEmployeeInfo() {
+    return inquirer.prompt(empQuestions)
+    .then(function(response) {
+        console.log(response);
+        if(response.role === "Manager") {
+            mgrArray.push(response);
+            console.log(mgrArray);
+        }
+    })
 };
 
 getEmployeeInfo();

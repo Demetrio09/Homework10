@@ -11,35 +11,35 @@ class Employee {
 
     getName() {
         return inquirer
-            .prompt([
+            .prompt(
                 {
                     type: "input",
                     message: "What is your name?",
                     name: "name"
                 }
-            ]);
+            );
     }
 
     getId() {
         return inquirer
-            .prompt([
+            .prompt(
                 {
                     type: "input",
                     message: "What is your id?",
                     name: "id"
                 }
-            ])
+            )
     }
 
     getEmail() {
         return inquirer
-            .prompt([
+            .prompt(
                 {
                     type: "input",
                     message: "What is your email?",
                     name: "email"
                 }
-            ])
+            )
     }
 
     getRole() {
