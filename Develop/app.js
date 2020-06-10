@@ -15,6 +15,13 @@ const mgrArray = [];
 const engArray = [];
 const intArray = [];
 
+const generalQuestion = {
+    type: "list",
+    message: "Who would you like to add?",
+    choices: ["Engineer", "Intern", "EXIT"],
+    name: "role"
+};
+
 const empQuestions = [
     {
         type: "list",
@@ -61,20 +68,115 @@ const mgrQuestion = [
     }
 ];
 
+const engQuestions = [
+    {
+        type: "input",
+        message: "What is the name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is the ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is the email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is the role?",
+        name: "role"
+    },
+    {
+        type: "input",
+        message: "What is the github username?",
+        name: "github"
+    }
+];
+
+const intQuestions = [
+    {
+        type: "input",
+        message: "What is the name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is the ID?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is the email?",
+        name: "email"
+    },
+    {
+        type: "input",
+        message: "What is the school?",
+        name: "school"
+    }
+];
+
 const Employee = require("./lib/Employee.js");
 
-function getEmployeeInfo() {
-    return inquirer.prompt(empQuestions)
-    .then(function(response) {
-        console.log(response);
-        if(response.role === "Manager") {
-            mgrArray.push(response);
-            console.log(mgrArray);
-        }
-    })
+function init() {
+    console.log("We are now adding the Manager info:")
+    return inquirer.prompt(mgrQuestion)
+        .then(function (response) {
+            console.log("Now we need to add employees to your team.");
+            mgrArray.push(response)
+            return inquirer.prompt(generalQuestion)
+                .then(function (res) {
+                    if (res.role === "Engineer") {
+                        // engArray.push(response);
+                        getEngInfo();
+                    }
+                    if (res.role === "Intern") {
+                        // intArray.push(response);
+                        getIntInfo();
+                    }
+                })
+        })
 };
 
-getEmployeeInfo();
+function getEmployeeInfo() {
+    return inquirer.prompt(generalQuestion)
+        .then(function (res) {
+            if (res.role === "Engineer") {
+                // engArray.push(response);
+                getEngInfo();
+            }
+            if (res.role === "Intern") {
+                // intArray.push(response);
+                getIntInfo();
+            }
+            if (res.role === "EXIT") {
+                render();
+            }
+        })
+}
+
+function getEngInfo() {
+    return inquirer.prompt(engQuestions)
+        .then(function (res) {
+            engArray.push(res);
+            getEmployeeInfo();
+            console.log(engArray);
+        })
+}
+
+function getIntInfo() {
+    return inquirer.prompt(intQuestions)
+        .then(function (res) {
+            intArray.push(res);
+            getEmployeeInfo();
+            console.log(intArray);
+        })
+}
+
+init();
 
 
 // Write code to use inquirer to gather information about the development team members,
