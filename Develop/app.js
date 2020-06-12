@@ -96,6 +96,7 @@ function init() {
         .then(function (res) {
             let manager = new Manager(
                 res.name,
+                // res.role,
                 res.id,
                 res.email,
                 res.officeNumber
@@ -118,14 +119,16 @@ function addEmployee() {
                     getIntInfo();
                     break;
                 default:
-                    writeHTML()
-            }
-            // if (res.role === "Engineer") {
-            //     getEngInfo();
-            // }
-            // if (res.role === "Intern") {
-            //     getIntInfo();
-            // }
+                    fs.writeFile(outputPath, render(employee), function (err) {
+
+                        if (err) {
+                            return console.log(err);
+                        }
+
+                        console.log("Success!");
+
+                    })
+            };
         });
 };
 
@@ -159,10 +162,6 @@ function getIntInfo() {
         });
 };
 
-function writeHTML() {
-    fs.writeFileSync(outputPath, render(employee), "utf-8");
-    console.log("Your file has been created!");
-};
 
 init();
 
