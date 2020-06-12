@@ -45,53 +45,55 @@ const empQuestions = [
         name: "email"
     }]
 
+const nextMember = {
+    type: "list",
+    message: "What type of team member would you like to add?",
+    choices: ["Engineer", "Intern", "I don't want to add any more team members"],
+    name: "teamMember"
+};
+
 const mgrQuestion = [
     {
         type: "input",
-        message: "What is your name?",
+        message: "What is your manager's name?",
         name: "name"
     },
     {
         type: "input",
-        message: "What is your ID?",
+        message: "What is your manager's id?",
         name: "id"
     },
     {
         type: "input",
-        message: "What is your email?",
+        message: "What is your manager's email?",
         name: "email"
     },
     {
         type: "input",
-        message: "What is your role?",
-        name: "role"
+        message: "What is your manager's office number?",
+        name: "number"
     }
 ];
 
 const engQuestions = [
     {
         type: "input",
-        message: "What is the name?",
+        message: "What is the engineer's name?",
         name: "name"
     },
     {
         type: "input",
-        message: "What is the ID?",
+        message: "What is the engineer's id?",
         name: "id"
     },
     {
         type: "input",
-        message: "What is the email?",
+        message: "What is the engineer's email?",
         name: "email"
     },
     {
         type: "input",
-        message: "What is the role?",
-        name: "role"
-    },
-    {
-        type: "input",
-        message: "What is the github username?",
+        message: "What is the github engineer's username?",
         name: "github"
     }
 ];
@@ -99,22 +101,22 @@ const engQuestions = [
 const intQuestions = [
     {
         type: "input",
-        message: "What is the name?",
+        message: "What is the intern's name?",
         name: "name"
     },
     {
         type: "input",
-        message: "What is the ID?",
+        message: "What is the intern's id?",
         name: "id"
     },
     {
         type: "input",
-        message: "What is the email?",
+        message: "What is the intern's email?",
         name: "email"
     },
     {
         type: "input",
-        message: "What is the school?",
+        message: "What is the intern's school?",
         name: "school"
     }
 ];
@@ -122,43 +124,43 @@ const intQuestions = [
 const Employee = require("./lib/Employee.js");
 
 function init() {
-    console.log("We are now adding the Manager info:")
+    console.log(`Please build your team`)
     return inquirer.prompt(mgrQuestion)
         .then(function (response) {
-            console.log("Now we need to add employees to your team.");
             mgrArray.push(response)
-            return inquirer.prompt(generalQuestion)
+            return inquirer.prompt(nextMember)
                 .then(function (res) {
-                    if (res.role === "Engineer") {
-                        // engArray.push(response);
+                    if (res.teamMember === "Engineer") {
+                        engArray.push(response);
                         getEngInfo();
                     }
-                    if (res.role === "Intern") {
-                        // intArray.push(response);
+                    if (res.teamMember === "Intern") {
+                        intArray.push(response);
                         getIntInfo();
+                    } else {
+                        // render();
                     }
                 })
         })
 };
 
 function getEmployeeInfo() {
-    return inquirer.prompt(generalQuestion)
+    console.log(`------------------------`);
+    return inquirer.prompt(nextMember)
         .then(function (res) {
-            if (res.role === "Engineer") {
-                // engArray.push(response);
+            if (res.teamMember === "Engineer") {
                 getEngInfo();
             }
-            if (res.role === "Intern") {
-                // intArray.push(response);
+            if (res.teamMember === "Intern") {
                 getIntInfo();
-            }
-            if (res.role === "EXIT") {
-                render();
+            } else {
+                // render();
             }
         })
 }
 
 function getEngInfo() {
+    console.log(`------------------------`);
     return inquirer.prompt(engQuestions)
         .then(function (res) {
             engArray.push(res);
@@ -168,6 +170,7 @@ function getEngInfo() {
 }
 
 function getIntInfo() {
+    console.log(`------------------------`);
     return inquirer.prompt(intQuestions)
         .then(function (res) {
             intArray.push(res);
