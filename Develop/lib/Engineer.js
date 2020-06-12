@@ -9,16 +9,13 @@ class Engineer extends Employee {
     }
 
     getGithub() {
+        return this.github;
     
     }
 
     getRole() {
-        const eng = "Engineer";
-        return eng;
+        return "Engineer";
     }
 }
-
-
-// const Engineer = new Engineer();
 
 module.exports = Engineer;

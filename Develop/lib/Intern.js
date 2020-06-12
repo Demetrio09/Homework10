@@ -9,16 +9,12 @@ class Intern extends Employee {
     }
 
     getSchool() {
-    
+        return this.school;
     }
 
     getRole() {
-        const int = "Intern";
-        return int;
+        return "Intern";
     }
 }
-
-
-// const Intern = new Intern();
 
 module.exports = Intern;

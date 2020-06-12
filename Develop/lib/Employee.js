@@ -1,5 +1,4 @@
 // TODO: Write code to define and export the Employee class
-const inquirer = require("inquirer");
 
 class Employee {
     constructor(name, role, email, id) {
@@ -10,42 +9,20 @@ class Employee {
     }
 
     getName() {
-        return inquirer
-            .prompt(
-                {
-                    type: "input",
-                    message: "What is your name?",
-                    name: "name"
-                }
-            );
+        return this.name;
     }
 
     getId() {
-        return inquirer
-            .prompt(
-                {
-                    type: "input",
-                    message: "What is your id?",
-                    name: "id"
-                }
-            )
+        return this.id;
     }
 
     getEmail() {
-        return inquirer
-            .prompt(
-                {
-                    type: "input",
-                    message: "What is your email?",
-                    name: "email"
-                }
-            )
+        return this.email;
     }
 
     getRole() {
-        const ee = "Employee";
-        return ee;
+        return "Employee";
     }
 }
-// Employee.getName();
+
 module.exports = Employee;

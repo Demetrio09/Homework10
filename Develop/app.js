@@ -10,46 +10,13 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const empArray = [];
-const mgrArray = [];
-const engArray = [];
-const intArray = [];
-
-const generalQuestion = {
-    type: "list",
-    message: "Who would you like to add?",
-    choices: ["Engineer", "Intern", "EXIT"],
-    name: "role"
-};
-
-const empQuestions = [
-    {
-        type: "list",
-        message: "What is your role?",
-        choices: ["Manager", "Engineer", "Intern"],
-        name: "role"
-    },
-    {
-        type: "input",
-        message: "What is your name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your ID?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your email?",
-        name: "email"
-    }]
+const employee = [];
 
 const nextMember = {
     type: "list",
     message: "What type of team member would you like to add?",
     choices: ["Engineer", "Intern", "I don't want to add any more team members"],
-    name: "teamMember"
+    name: "role"
 };
 
 const mgrQuestion = [
@@ -126,58 +93,66 @@ const Employee = require("./lib/Employee.js");
 function init() {
     console.log(`Please build your team`)
     return inquirer.prompt(mgrQuestion)
-        .then(function (response) {
-            mgrArray.push(response)
-            return inquirer.prompt(nextMember)
-                .then(function (res) {
-                    if (res.teamMember === "Engineer") {
-                        engArray.push(response);
-                        getEngInfo();
-                    }
-                    if (res.teamMember === "Intern") {
-                        intArray.push(response);
-                        getIntInfo();
-                    } else {
-                        // render();
-                    }
-                })
-        })
+        .then(function (res) {
+            let manager = new Manager(
+                res.name,
+                res.id,
+                res.email,
+                res.number
+            );
+            employee.push(manager);
+            addEmployees();
+        });
 };
 
-function getEmployeeInfo() {
+function addEmployees() {
     console.log(`------------------------`);
     return inquirer.prompt(nextMember)
         .then(function (res) {
-            if (res.teamMember === "Engineer") {
+            console.log(res);
+            if (res.role === "Engineer") {
                 getEngInfo();
             }
-            if (res.teamMember === "Intern") {
+            if (res.role === "Intern") {
                 getIntInfo();
             } else {
-                // render();
-            }
-        })
-}
+                fs.writeFileSync(outputPath, render(employee), "utf-8");
+                console.log("Your file has been created!")
+            };
+        });
+};
 
 function getEngInfo() {
     console.log(`------------------------`);
     return inquirer.prompt(engQuestions)
         .then(function (res) {
-            engArray.push(res);
-            getEmployeeInfo();
-            console.log(engArray);
-        })
-}
+            let engineer = new Engineer(
+                res.name,
+                res.id,
+                res.email,
+                res.github
+            );
+            employee.push(engineer);
+            addEmployees();
+            // console.log(engArray);
+        });
+};
 
 function getIntInfo() {
     console.log(`------------------------`);
     return inquirer.prompt(intQuestions)
         .then(function (res) {
-            intArray.push(res);
-            getEmployeeInfo();
-            console.log(intArray);
-        })
-}
+            let intern = new Intern(
+                res.name,
+                res.id,
+                res.id,
+                res.school
+            );
+            employee.push(intern);
+            addEmployees();
+            // console.log(intArray);
+        });
+};
 
 init();
 

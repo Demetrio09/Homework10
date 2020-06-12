@@ -9,11 +9,8 @@ class Manager extends Employee {
     }
 
     getRole() {
-        const mgr = "Manager";
-        return mgr;
+        return "Manager";
     }
 }
-
-// const Manager = new Manager();
 
 module.exports = Manager;
