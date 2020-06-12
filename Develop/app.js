@@ -38,7 +38,7 @@ const mgrQuestion = [
     {
         type: "input",
         message: "What is your manager's office number?",
-        name: "number"
+        name: "officeNumber"
     }
 ];
 
@@ -98,32 +98,38 @@ function init() {
                 res.name,
                 res.id,
                 res.email,
-                res.number
+                res.officeNumber
             );
             employee.push(manager);
-            addEmployees();
+            console.log(employee);
+            addEmployee();
         });
 };
 
-function addEmployees() {
+function addEmployee() {
     console.log(`------------------------`);
     return inquirer.prompt(nextMember)
         .then(function (res) {
-            console.log(res);
-            if (res.role === "Engineer") {
-                getEngInfo();
+            switch (res.role) {
+                case "Engineer":
+                    getEngInfo();
+                    break;
+                case "Intern":
+                    getIntInfo();
+                    break;
+                default:
+                    writeHTML()
             }
-            if (res.role === "Intern") {
-                getIntInfo();
-            } else {
-                fs.writeFileSync(outputPath, render(employee), "utf-8");
-                console.log("Your file has been created!")
-            };
+            // if (res.role === "Engineer") {
+            //     getEngInfo();
+            // }
+            // if (res.role === "Intern") {
+            //     getIntInfo();
+            // }
         });
 };
 
 function getEngInfo() {
-    console.log(`------------------------`);
     return inquirer.prompt(engQuestions)
         .then(function (res) {
             let engineer = new Engineer(
@@ -133,13 +139,12 @@ function getEngInfo() {
                 res.github
             );
             employee.push(engineer);
-            addEmployees();
-            // console.log(engArray);
+            console.log(employee);
+            addEmployee();
         });
 };
 
 function getIntInfo() {
-    console.log(`------------------------`);
     return inquirer.prompt(intQuestions)
         .then(function (res) {
             let intern = new Intern(
@@ -149,9 +154,14 @@ function getIntInfo() {
                 res.school
             );
             employee.push(intern);
-            addEmployees();
-            // console.log(intArray);
+            console.log(employee);
+            addEmployee();
         });
+};
+
+function writeHTML() {
+    fs.writeFileSync(outputPath, render(employee), "utf-8");
+    console.log("Your file has been created!");
 };
 
 init();
