@@ -27,13 +27,13 @@ const mgrQuestion = [
     },
     {
         type: "input",
-        message: "What is your manager's id?",
-        name: "id"
+        message: "What is your manager's email?",
+        name: "email"
     },
     {
         type: "input",
-        message: "What is your manager's email?",
-        name: "email"
+        message: "What is your manager's id?",
+        name: "id"
     },
     {
         type: "input",
@@ -50,13 +50,13 @@ const engQuestions = [
     },
     {
         type: "input",
-        message: "What is the engineer's id?",
-        name: "id"
+        message: "What is the engineer's email?",
+        name: "email"
     },
     {
         type: "input",
-        message: "What is the engineer's email?",
-        name: "email"
+        message: "What is the engineer's id?",
+        name: "id"
     },
     {
         type: "input",
@@ -73,13 +73,13 @@ const intQuestions = [
     },
     {
         type: "input",
-        message: "What is the intern's id?",
-        name: "id"
+        message: "What is the intern's email?",
+        name: "email"
     },
     {
         type: "input",
-        message: "What is the intern's email?",
-        name: "email"
+        message: "What is the intern's id?",
+        name: "id"
     },
     {
         type: "input",
@@ -96,13 +96,12 @@ function init() {
         .then(function (res) {
             let manager = new Manager(
                 res.name,
-                // res.role,
-                res.id,
                 res.email,
+                res.id,
                 res.officeNumber
             );
             employee.push(manager);
-            console.log(employee);
+            // console.log(employee);
             addEmployee();
         });
 };
@@ -120,13 +119,10 @@ function addEmployee() {
                     break;
                 default:
                     fs.writeFile(outputPath, render(employee), function (err) {
-
                         if (err) {
                             return console.log(err);
                         }
-
                         console.log("Success!");
-
                     })
             };
         });
@@ -142,7 +138,7 @@ function getEngInfo() {
                 res.github
             );
             employee.push(engineer);
-            console.log(employee);
+            // console.log(employee);
             addEmployee();
         });
 };
@@ -153,11 +149,11 @@ function getIntInfo() {
             let intern = new Intern(
                 res.name,
                 res.id,
-                res.id,
+                res.email,
                 res.school
             );
             employee.push(intern);
-            console.log(employee);
+            // console.log(employee);
             addEmployee();
         });
 };
